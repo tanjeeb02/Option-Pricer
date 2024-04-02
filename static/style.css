@@ -1,0 +1,158 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 15px 20px;
+    display: inline-block;
+}
+
+.active-tab {
+    background-color: #007bff;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#optionCalculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.method {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.method label {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.method select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 35%;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.input-group label {
+    flex-shrink: 0;
+    flex-basis: 150px;
+    text-align: center;
+}
+
+.input-group input,
+.input-group select {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.input-unit-container {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+}
+
+.input-group input {
+    padding-right: 30px;
+}
+
+.unit {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    pointer-events: none;
+    color: #555;
+}
+
+/* For Chrome, Safari, and Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* For IE11 */
+input[type="number"]::-ms-clear,
+input[type="number"]::-ms-reveal {
+    display: none;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding: 20px 20px;
+}
+
+#impliedVolatility {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding-top: 20px;
+}
+
+#calculate {
+    display: block;
+    padding: 10px 40px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#calculate:hover {
+    background-color: #0056b3;
+}

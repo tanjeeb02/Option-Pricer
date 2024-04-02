@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Option Pricer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='change_method.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='change_tabs.js') }}"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <a id="optionTab" href="#">Option Calculator</a>
+        <a id="volatilityTab" href="#">Implied Volatility</a>
+    </nav>
+</header>
+
+<main class="main-container">
+
+    <div id="optionCalculator">
+        <div class="method">
+            <label for="pricingMethod">Pricing Method</label>
+            <select id="pricingMethod">
+                <option value="european_option">Black Scholes European</option>
+                <option value="american_option">Binomial American</option>
+                <option value="asian_geometric_option">Geometric Asian</option>
+                <option value="asian_arithmetic_option">Arithmetic Asian</option>
+                <option value="geometric_basket_option">Geometric Basket</option>
+                <option value="arithmetic_basket_option">Arithmetic Basket</option>
+                <option value="kiko_put">Quasi Monte Carlo Kiko</option>
+            </select>
+        </div>
+
+        <form class="form-container" id="optionForm">
+            <div class="input-group">
+                <label for="spotPrice">Spot Price</label>
+                <input type="number" name="spotPrice" id="spotPrice" value=100>
+            </div>
+
+            <div class="input-group">
+                <label for="spotPriceTwo">Spot Price 2</label>
+                <input type="number" name="spotPriceTwo" id="spotPriceTwo" value=100>
+            </div>
+
+            <div class="input-group">
+                <label for="interestRate">Interest Rate (r)</label>
+                <div class="input-unit-container">
+                    <input type="number" name="interestRate" id="interestRate" value=0.05>
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="repoRate">Repo Rate (q)</label>
+                <div class="input-unit-container">
+                    <input type="number" name="repoRate" id="repoRate" value=0>
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="maturity">Maturity (Years)</label>
+                <input type="number" name="maturity" id="maturity" value=3>
+            </div>
+
+            <div class="input-group">
+                <label for="strikePrice">Strike Price</label>
+                <input type="number" name="strikePrice" id="strikePrice" value=100>
+            </div>
+
+            <div class="input-group">
+                <label for="volatility">Volatility</label>
+                <div class="input-unit-container">
+                    <input type="number" name="volatility" id="volatility" value=0.3>
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="volatilityTwo">Volatility 2</label>
+                <div class="input-unit-container">
+                    <input type="number" name="volatilityTwo" id="volatilityTwo" value=0.3>
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="steps">Number of Steps (n)</label>
+                <input type="number" name="steps" id="steps" value=50>
+            </div>
+
+            <div class="input-group">
+                <label for="correlation">Correlation</label>
+                <div class="input-unit-container">
+                    <input type="number" name="correlation" id="correlation" value=0.5>
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="lowerBarrier">Lower Barrier (L)</label>
+                <input type="number" name="lowerBarrier" id="lowerBarrier" value=75>
+            </div>
+
+            <div class="input-group">
+                <label for="upperBarrier">Upper Barrier (U)</label>
+                <input type="number" name="upperBarrier" id="upperBarrier" value=105>
+            </div>
+
+            <div class="input-group">
+                <label for="cashRebate">Cash Rebate (R)</label>
+                <div class="input-unit-container">
+                    <input type="number" name="cashRebate" id="cashRebate" value=5>
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="observations">Number of Observations (n)</label>
+                <input type="number" name="observations" id="observations" value=50>
+            </div>
+
+            <div class="input-group">
+                <label for="paths">Number of Paths (m)</label>
+                <input type="number" name="paths" id="paths" value=100000>
+            </div>
+
+            <div class="input-group">
+                <label for="isMonte">Calculation Method</label>
+                <select name="isMonte" id="isMonte">
+                    <option value="False">Closed Form</option>
+                    <option value="True">Monte Carlo</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="controlVariate">Control Variate</label>
+                <select name="controlVariate" id="controlVariate">
+                    <option value="True">Geometric Option</option>
+                    <option value="False">No Control Variate</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="optionType">Option Type</label>
+                <select name="optionType" id="optionType">
+                    <option value="call">Call Option</option>
+                    <option value="put">Put Option</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="optionValue">Option Value</label>
+                <input type="number" name="optionValue" id="optionValue" disabled>
+            </div>
+
+            <div class="input-group">
+                <label for="confidenceInterval">Confidence Interval</label>
+                <input type="text" name="confidenceInterval" id="confidenceInterval" disabled>
+            </div>
+
+            <div class="input-group">
+                <label for="deltaValue">Delta Value</label>
+                <input type="number" name="deltaValue" id="deltaValue" disabled>
+            </div>
+        </form>
+    </div>
+
+    <div id="impliedVolatility">
+        <form class="form-container" id="volatilityForm">
+            <div class="input-group">
+                <label for="ivSpotPrice">Spot Price</label>
+                <input type="number" name="ivSpotPrice" id="ivSpotPrice" value="2">
+            </div>
+
+            <div class="input-group">
+                <label for="ivInterestRate">Interest Rate (r)</label>
+                <div class="input-unit-container">
+                    <input type="number" name="ivInterestRate" id="ivInterestRate" value="0.03">
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="ivRepoRate">Repo Rate (q)</label>
+                <div class="input-unit-container">
+                    <input type="number" name="ivRepoRate" id="ivRepoRate" value="0">
+                    <span class="unit">dec</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="ivMaturity">Maturity (Years)</label>
+                <input type="number" name="ivMaturity" id="ivMaturity" value="3">
+            </div>
+
+            <div class="input-group">
+                <label for="ivStrikePrice">Strike Price</label>
+                <input type="number" name="ivStrikePrice" id="ivStrikePrice" value="2">
+            </div>
+
+            <div class="input-group">
+                <label for="optionPremium">Option Premium</label>
+                <input type="number" name="optionPremium" id="optionPremium" value="0.484">
+            </div>
+
+            <div class="input-group">
+                <label for="ivOptionType">Option Type</label>
+                <select name="ivOptionType" id="ivOptionType">
+                    <option value="call">Call Option</option>
+                    <option value="put">Put Option</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="ivResult">Implied Volatility</label>
+                <input type="number" name="ivResult" id="ivResult" disabled>
+            </div>
+        </form>
+    </div>
+
+    <div class="input-group">
+        <button type="button" id="calculate">Calculate</button>
+    </div>
+
+</main>
+</body>
+</html>
